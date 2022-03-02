@@ -6,7 +6,7 @@
 }
 
 .right {
-  background-color: #454545;
+  background: radial-gradient(50% 50% at 50% 50%, #0c0d0e 0%, #151718 73.44%);
   width: 50%;
 }
 .left {
@@ -30,7 +30,7 @@
   text-align: left;
   margin: auto;
   letter-spacing: 5%;
-  margin-top: 167px;
+  margin-top: 137px;
   font-weight: 400;
 }
 
@@ -39,8 +39,8 @@
   display: flex;
   width: fit-content;
   margin-top: 131px;
-  margin-bottom: 175px;
-  gap: 52px;
+  margin-bottom: 170px;
+  gap: 40px;
   flex-direction: column;
 }
 

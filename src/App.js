@@ -1,9 +1,8 @@
-import PersonalInfoMain from "./components/Form/PerosnalInfoMain";
-
+import FormMain from "./components/Form/FormMain";
 function App() {
   return (
     <div className="App">
-      <PersonalInfoMain></PersonalInfoMain>
+      <FormMain></FormMain>
     </div>
   );
 }

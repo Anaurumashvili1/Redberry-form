@@ -1,4 +1,7 @@
-import classes from "./form.module.css";
+import classes from "../form.module.css";
+import PageSwitcher from "../PageSwitcher";
+import ellipse from "../../../EllipseRed.png";
+import lightEllipse from "../../../EllipseLight.png";
 
 const PersonalInfoLeft = () => {
   return (
@@ -12,6 +15,13 @@ const PersonalInfoLeft = () => {
         <input type="email" placeHolder="Email" />
         <input type="text" placeHolder="+995 5-- --- ---" />
       </form>
+      <PageSwitcher>
+        <img src={ellipse} alt="" />
+        <img src={lightEllipse} alt="" />
+        <img src={lightEllipse} alt="" />
+        <img src={lightEllipse} alt="" />
+        <img src={lightEllipse} alt="" />
+      </PageSwitcher>
     </div>
   );
 };

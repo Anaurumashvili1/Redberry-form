@@ -1,5 +1,5 @@
 import PersonalInfoRight from "./PersonalInfoRight";
-import FormWrapper from "./FormWrapper";
+import FormWrapper from "../FormWrapper";
 import PersonalInfoLeft from "./PersonalInfoLeft";
 
 const PersonalInfoMain = () => {
