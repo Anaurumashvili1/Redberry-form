@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap");
+
+.wrapper {
+  display: flex;
+  height: 100vh;
+}
+
+.right {
+  background-color: #454545;
+  width: 50%;
+}
+.left {
+  width: 50%;
+}
+.title {
+  font-family: "Rowdies";
+  color: #fe3b1f;
+  width: 716px;
+  font-size: 64px;
+  height: fit-content;
+  margin: auto;
+
+  margin-top: 127px;
+  text-align: left;
+}
+.rightP {
+  color: white;
+  line-height: 48px;
+  width: 705px;
+  text-align: left;
+  margin: auto;
+  letter-spacing: 5%;
+  margin-top: 167px;
+  font-weight: 400;
+}
+
+.form {
+  margin: auto;
+  display: flex;
+  width: fit-content;
+  margin-top: 131px;
+  margin-bottom: 175px;
+  gap: 52px;
+  flex-direction: column;
+}
+
+input {
+  display: block;
+  height: 54px;
+  width: 400px;
+  padding-left: 54px;
+}
