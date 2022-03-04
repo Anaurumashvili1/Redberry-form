@@ -1,9 +1,11 @@
-import PersonalInfoMain from "./PersonalInfo/PerosnalInfoMain";
-
+// import PersonalInfoMain from './PersonalInfo/PerosnalInfoMain';
+// import SkillsMain from './Skills/SkillsMain';
+import InsightsMain from './Insights/InsightsMain';
+// import CovidMain from './Covid/CovidMain';
 const FormMain = () => {
   return (
     <>
-      <PersonalInfoMain></PersonalInfoMain>
+      <InsightsMain></InsightsMain>
     </>
   );
 };

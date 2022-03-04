@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap');
+
+.text {
+  color: #fe3b1f;
+  font-size: 96px;
+  line-height: 119px;
+  font-family: 'Rowdies';
+  text-align: center;
+  padding-top: 444px;
+}
+
+.mainDiv {
+  background: radial-gradient(50% 50% at 50% 50%, #0c0d0e 0%, #151718 73.44%);
+  height: 100vh;
+}

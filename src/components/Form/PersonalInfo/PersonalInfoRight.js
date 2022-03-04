@@ -1,4 +1,4 @@
-import classes from "../form.module.css";
+import classes from '../form.module.css';
 
 const PersonalInfoRight = () => {
   return (

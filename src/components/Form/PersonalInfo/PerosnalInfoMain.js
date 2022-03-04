@@ -1,6 +1,6 @@
-import PersonalInfoRight from "./PersonalInfoRight";
-import FormWrapper from "../FormWrapper";
-import PersonalInfoLeft from "./PersonalInfoLeft";
+import PersonalInfoRight from './PersonalInfoRight';
+import FormWrapper from '../FormWrapper';
+import PersonalInfoLeft from './PersonalInfoLeft';
 
 const PersonalInfoMain = () => {
   return (

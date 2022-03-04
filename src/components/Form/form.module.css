@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap');
 
 .wrapper {
   display: flex;
@@ -11,21 +11,27 @@
 }
 .left {
   width: 50%;
+  height: 100vh;
+  overflow: scroll;
 }
 .title {
-  font-family: "Rowdies";
+  font-family: 'Rowdies';
   color: #fe3b1f;
-  width: 716px;
+  width: fit-content;
   font-size: 64px;
   height: fit-content;
   margin: auto;
-
+  line-height: 79.49px;
   margin-top: 127px;
   text-align: left;
+}
+.titleFirst {
+  width: 715px;
 }
 .rightP {
   color: white;
   line-height: 48px;
+
   width: 705px;
   text-align: left;
   margin: auto;
@@ -44,9 +50,103 @@
   flex-direction: column;
 }
 
-input {
+input,
+select {
   display: block;
   height: 54px;
-  width: 400px;
+  width: 399px;
   padding-left: 54px;
+  font-size: 14px;
+  cursor: pointer;
+}
+select {
+  width: 454px;
+  appearance: none;
+  background-color: white;
+  color: #454545;
+  background-image: url('../../SelectArrow.png');
+  background-repeat: no-repeat;
+  background-position: 420px;
+}
+button {
+  cursor: pointer;
+}
+.button {
+  color: white;
+  background-color: #fe3b1f;
+  width: 201px;
+  font-size: 12px;
+  line-height: 14.63px;
+  border: none;
+  height: 32px;
+  align-self: flex-end;
+  margin-bottom: 56px;
+}
+.skills {
+  width: 447px;
+  height: 48px;
+  border: 1px solid #525557;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.skills p,
+img,
+span {
+  font-size: 14px;
+}
+.skills img {
+  padding-right: 12px;
+}
+.innerFlex {
+  padding-left: 17px;
+  width: 260px;
+  display: flex;
+  justify-content: space-between;
+}
+.required {
+  font-size: 11px;
+  color: #fe3b1f;
+  margin-left: 50px;
+  position: relative;
+  bottom: 35px;
+  margin-bottom: -35px;
+}
+
+.radioInput {
+  width: auto;
+  display: initial;
+  position: relative;
+  top: 12px;
+  margin-right: 7px;
+  font-size: 14px;
+  height: 35px;
+  margin-left: 10px;
+}
+
+label {
+  display: block;
+  font-size: 18px;
+  line-height: 22px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  /* letter-spacing: 10%; */
+}
+.dateLabel {
+  margin-bottom: 27px;
+}
+.formCovid {
+  margin-top: 120px;
+}
+.inputText {
+  font-size: 14px;
+}
+
+textarea {
+  padding: 24px;
+  font-size: 14px;
+  color: #3a3a3a;
+  width: 535px;
+  margin-top: 32px;
 }
