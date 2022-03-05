@@ -2,7 +2,7 @@ import classes from './Main.module.css';
 import Button from './Button';
 import rocketman from '../../rocketman.png';
 import { Link } from 'react-router-dom';
-import FormMain from '../Form/FormMain';
+
 const Main = () => {
   return (
     <div className={classes.stars}>

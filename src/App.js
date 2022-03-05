@@ -6,8 +6,16 @@ import PersonalInfoMain from './components/Form/PersonalInfo/PerosnalInfoMain';
 import SkillsMain from './components/Form/Skills/SkillsMain';
 import CovidMain from './components/Form/Covid/CovidMain';
 import InsightsMain from './components/Form/Insights/InsightsMain';
+import { useState, useEffect } from 'react';
 
 function App() {
+  const [isMainPath, setIsMainPath] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsMainPath(true);
+    }, 3000);
+  }, []);
   return (
     <div className="App">
       <BrowserRouter>
@@ -18,7 +26,13 @@ function App() {
           <Route path="/covid" element={<CovidMain />} />
           <Route path="/insights" element={<InsightsMain />} />
           <Route path="/submit" element={<Submit />} />
-          <Route path="/thank-you" element={<ThankYouPage />} />
+
+          {!isMainPath ? (
+            <Route path="/thank-you" element={<ThankYouPage />}></Route>
+          ) : (
+            <Route path="/thank-you" element={<Main />} />
+          )}
+
           <Route
             path="*"
             element={
