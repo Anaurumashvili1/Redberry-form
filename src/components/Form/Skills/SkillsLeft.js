@@ -123,13 +123,15 @@ const SkillsLeft = () => {
             );
           })}
         </form>
-        <PageSwitcher>
-          <img src={ellipse} alt="" />
-          <img src={ellipse} alt="" />
-          <img src={lightEllipse} alt="" />
-          <img src={lightEllipse} alt="" />
-          <img src={lightEllipse} alt="" />
-        </PageSwitcher>
+        <PageSwitcher
+          previous="/personal"
+          next="/covid"
+          img={ellipse}
+          img2={ellipse}
+          img3={lightEllipse}
+          img4={lightEllipse}
+          img4={lightEllipse}
+        ></PageSwitcher>
       </div>
     </>
   );

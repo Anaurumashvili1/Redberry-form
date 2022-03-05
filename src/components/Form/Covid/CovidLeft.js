@@ -119,13 +119,15 @@ const CovidLeft = () => {
             </div>
           )}
         </div>
-        <PageSwitcher>
-          <img src={ellipse} alt="" />
-          <img src={ellipse} alt="" />
-          <img src={ellipse} alt="" />
-          <img src={lightEllipse} alt="" />
-          <img src={lightEllipse} alt="" />
-        </PageSwitcher>
+        <PageSwitcher
+          previous="/skills"
+          next="/insights"
+          img={ellipse}
+          img2={ellipse}
+          img3={ellipse}
+          img4={lightEllipse}
+          img4={lightEllipse}
+        ></PageSwitcher>
       </div>
     </>
   );

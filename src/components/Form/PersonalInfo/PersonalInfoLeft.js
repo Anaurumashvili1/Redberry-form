@@ -14,13 +14,15 @@ const PersonalInfoLeft = () => {
         <input type="email" placeholder="Email" />
         <input type="text" placeholder="+995 5-- --- ---" />
       </form>
-      <PageSwitcher>
-        <img src={ellipse} alt="" />
-        <img src={lightEllipse} alt="" />
-        <img src={lightEllipse} alt="" />
-        <img src={lightEllipse} alt="" />
-        <img src={lightEllipse} alt="" />
-      </PageSwitcher>
+      <PageSwitcher
+        previous="/"
+        next="/skills"
+        img={ellipse}
+        img2={lightEllipse}
+        img3={lightEllipse}
+        img4={lightEllipse}
+        img4={lightEllipse}
+      ></PageSwitcher>
     </div>
   );
 };

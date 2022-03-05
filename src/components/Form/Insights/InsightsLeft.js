@@ -53,7 +53,15 @@ const InsightsLeft = () => {
             <textarea name="you" id="you" placeholder="I..."></textarea>
           </div>
         </form>
-        <PageSwitcher></PageSwitcher>
+        <PageSwitcher
+          previous="/covid"
+          next="/submit"
+          img={ellipse}
+          img2={ellipse}
+          img3={ellipse}
+          img4={ellipse}
+          img5={lightEllipse}
+        ></PageSwitcher>
       </div>
     </>
   );
