@@ -6,12 +6,12 @@ import PersonalInfoMain from './components/Form/PersonalInfo/PerosnalInfoMain';
 import SkillsMain from './components/Form/Skills/SkillsMain';
 import CovidMain from './components/Form/Covid/CovidMain';
 import InsightsMain from './components/Form/Insights/InsightsMain';
-import { useState, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 
 function App() {
   const [isMainPath, setIsMainPath] = useState(false);
 
-  useEffect(() => {
+  const timeout = useCallback(() => {
     setTimeout(() => {
       setIsMainPath(true);
     }, 3000);
@@ -25,7 +25,7 @@ function App() {
           <Route path="/skills" element={<SkillsMain />} />
           <Route path="/covid" element={<CovidMain />} />
           <Route path="/insights" element={<InsightsMain />} />
-          <Route path="/submit" element={<Submit />} />
+          <Route path="/submit" element={<Submit timeout={timeout} />} />
 
           {!isMainPath ? (
             <Route path="/thank-you" element={<ThankYouPage />}></Route>

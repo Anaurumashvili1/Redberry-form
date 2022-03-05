@@ -1,9 +1,11 @@
 import classes from './Submit.module.css';
 
-const Button = () => {
+const Button = (props) => {
   return (
     <>
-      <button className={classes.button}>Submit</button>
+      <button onClick={props.timeout} className={classes.button}>
+        Submit
+      </button>
     </>
   );
 };
