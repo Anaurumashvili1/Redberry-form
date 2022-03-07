@@ -1,8 +1,8 @@
-import { createContext } from 'react';
+import { createContext, useCallback } from 'react';
 import { useReducer, useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { CollectInfoContext } from './collectInfoContext';
-import useSubmit from '../hooks/use-submit';
+// import useSubmit from '../hooks/use-submit';
 
 export const SkillsContext = createContext({
   skillTitle: 'Skill',
@@ -88,7 +88,7 @@ const skillsValidityReducer = (state, action) => {
 };
 
 export const SkillsProvider = ({ children }) => {
-  const infoCtx = useContext(CollectInfoContext);
+  //   const infoCtx = useContext(CollectInfoContext);
   const [skills, setSkills] = useState([]);
 
   useEffect(() => {
@@ -145,7 +145,7 @@ export const SkillsProvider = ({ children }) => {
       dispatchTitle({ type: 'ERROR' });
     } else if (!yearState.isValid) {
       dispatchYear({ type: 'ERROR' });
-    } else if (!titleState.value === 'Skills') {
+    } else if (!titleState.isSelected) {
       dispatchTitle({ type: 'ERROR' });
     }
   };
@@ -170,10 +170,14 @@ export const SkillsProvider = ({ children }) => {
   const titleChanger = (e) => {
     dispatchTitle({ type: 'USER_INPUT', payload: e.target.value });
   };
-  const submitPage = () => {
-    dispatchSkillsValidity({ type: 'SUBMIT' });
-  };
+  const infoCtx = useContext(CollectInfoContext);
   const skillsInfo = { skills: removedList.map((e) => e[0]) };
+
+  const submitPage = useCallback(() => {
+    dispatchSkillsValidity({ type: 'SUBMIT' });
+  }, []);
+
+  // useCallback(useSubmit(skillsInfo), [skillsInfo]);
 
   const skillsContext = {
     skillTitle: titleState.value,

@@ -2,21 +2,21 @@ import classes from '../form.module.css';
 import PageSwitcher from '../PageSwitcher';
 import ellipse from '../../../EllipseRed.png';
 import lightEllipse from '../../../EllipseLight.png';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { SkillsContext } from '../../../store/formContext';
 import minus from '../../../Remove.png';
 import { SwitcherContext } from '../../../store/switchPageContext';
-// import { CollectInfoContext } from '../../../store/collectInfoContext';
-import useSubmit from '../../../hooks/use-submit';
+import { CollectInfoContext } from '../../../store/collectInfoContext';
+// import useSubmit from '../../../hooks/use-submit';
 
 const SkillsLeft = () => {
   const context = useContext(SkillsContext);
   const ctx = context.skillsContext;
   const switcherCtx = useContext(SwitcherContext);
-
+  // console.log(ctx);
+  const infoCtx = useContext(CollectInfoContext);
+  console.log(infoCtx.info);
   const pageValidationClasses = classes.required + ' ' + classes.requiredBottom;
-
-  const { submit } = useSubmit(ctx.skillsInfo);
 
   return (
     <>
@@ -79,7 +79,7 @@ const SkillsLeft = () => {
         <PageSwitcher
           previous="/personal"
           next={switcherCtx.covidPageLink}
-          click={submit}
+          click={ctx.submitPage}
           img={ellipse}
           img2={ellipse}
           img3={lightEllipse}

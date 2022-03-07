@@ -1,13 +1,14 @@
-import { createContext, useContext } from 'react';
+import { createContext, useCallback, useContext } from 'react';
 import { useState, useEffect } from 'react';
 import { SkillsContext } from './formContext';
 
 export const CollectInfoContext = createContext({
   info: {},
-  submit: (submitted) => {},
 });
 
 export const CollectInfoProvider = ({ children }) => {
+  const ctx = useContext(SkillsContext);
+
   const [info, setInfo] = useState({
     token: '23b05ea5-c77a-4096-92c2-d29670f23e0d',
     // first_name: '',
@@ -24,18 +25,16 @@ export const CollectInfoProvider = ({ children }) => {
     // devtalk_topic: '',
     // something_special: '',
   });
-
-  const submit = (receivedInfo) => {
+  const receivedInfo = ctx.skillsContext.skillsInfo;
+  useEffect(() => {
     setInfo((prevState) => ({
       ...prevState,
       ...receivedInfo,
     }));
-
-    return info;
-  };
+  }, [receivedInfo]);
 
   return (
-    <CollectInfoContext.Provider value={{ info, submit }}>
+    <CollectInfoContext.Provider value={{ info }}>
       {children}
     </CollectInfoContext.Provider>
   );

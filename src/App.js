@@ -23,33 +23,33 @@ function App() {
     <div className="App">
       <SkillsProvider>
         <SwitcherProvider>
-          {/* <CollectInfoProvider> */}
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Main />}></Route>
-              <Route path="/personal" element={<PersonalInfoMain />}></Route>
-              <Route path="/skills" element={<SkillsMain />} />
-              <Route path="/covid" element={<CovidMain />} />
-              <Route path="/insights" element={<InsightsMain />} />
-              <Route path="/submit" element={<Submit timeout={timeout} />} />
+          <CollectInfoProvider>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Main />}></Route>
+                <Route path="/personal" element={<PersonalInfoMain />}></Route>
+                <Route path="/skills" element={<SkillsMain />} />
+                <Route path="/covid" element={<CovidMain />} />
+                <Route path="/insights" element={<InsightsMain />} />
+                <Route path="/submit" element={<Submit timeout={timeout} />} />
 
-              {!isMainPath ? (
-                <Route path="/thank-you" element={<ThankYouPage />}></Route>
-              ) : (
-                <Route path="/thank-you" element={<Main />} />
-              )}
+                {!isMainPath ? (
+                  <Route path="/thank-you" element={<ThankYouPage />}></Route>
+                ) : (
+                  <Route path="/thank-you" element={<Main />} />
+                )}
 
-              <Route
-                path="*"
-                element={
-                  <main style={{ padding: '1rem' }}>
-                    <p>not defined yet</p>
-                  </main>
-                }
-              />
-            </Routes>
-          </BrowserRouter>{' '}
-          {/* </CollectInfoProvider> */}
+                <Route
+                  path="*"
+                  element={
+                    <main style={{ padding: '1rem' }}>
+                      <p>not defined yet</p>
+                    </main>
+                  }
+                />
+              </Routes>
+            </BrowserRouter>{' '}
+          </CollectInfoProvider>
         </SwitcherProvider>
       </SkillsProvider>
     </div>
