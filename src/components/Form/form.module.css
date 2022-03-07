@@ -150,3 +150,8 @@ textarea {
   width: 535px;
   margin-top: 32px;
 }
+.requiredBottom {
+  left: 412px;
+  font-size: 12px;
+  margin: 0;
+}
