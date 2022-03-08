@@ -157,7 +157,7 @@ export const SkillsProvider = ({ children }) => {
     const toRemove = skillsValidityState.skillsArray.find(
       (skill) => skill.title === fromRemoved.title
     );
-
+    setRemovedList(removedList.filter((obj) => obj[0] !== fromRemoved));
     dispatchSkillsValidity({
       type: 'REMOVE',
       payload: toRemove,
@@ -170,9 +170,13 @@ export const SkillsProvider = ({ children }) => {
   const titleChanger = (e) => {
     dispatchTitle({ type: 'USER_INPUT', payload: e.target.value });
   };
+  const removedListMapped = removedList.map((e) => e[0]);
 
-  const skillsInfo = { skills: removedList.map((e) => e[0].id) };
-  console.log(skillsInfo);
+  const skillsInfo = removedListMapped.map((e, i) => ({
+    id: e.id,
+    experience: skillsValidityState.skillsArray[i].years,
+  }));
+
   const submitPage = useCallback(() => {
     dispatchSkillsValidity({ type: 'SUBMIT' });
   }, []);

@@ -13,7 +13,7 @@ export const CollectInfoContext = createContext({
 
 export const CollectInfoProvider = ({ children }) => {
   const ctx = useContext(SkillsContext);
-  const receivedSkillsInfo = ctx.skillsContext.skillsInfo;
+  const skillsCtx = ctx.skillsContext;
   const personalInfoContext = useContext(PersonalInfoContext);
   const personalCtx = personalInfoContext.personalContext;
   const covidCtx = useContext(CovidContext);
@@ -44,7 +44,7 @@ export const CollectInfoProvider = ({ children }) => {
         last_name: personalCtx.last_name,
         email: personalCtx.email,
         phone: personalCtx.phone,
-        ...receivedSkillsInfo,
+        skills: skillsCtx.skillsInfo,
         work_preference: covidCtx.workType,
         had_covid: covidCtx.hadCovid,
         had_covid_at: covidCtx.covidDate,
@@ -61,7 +61,7 @@ export const CollectInfoProvider = ({ children }) => {
         last_name: personalCtx.last_name,
         email: personalCtx.email,
         phone: personalCtx.phone,
-        ...receivedSkillsInfo,
+        skills: skillsCtx.skillsInfo,
         work_preference: covidCtx.workType,
         had_covid: covidCtx.hadCovid,
         had_covid_at: covidCtx.covidDate,
@@ -77,7 +77,7 @@ export const CollectInfoProvider = ({ children }) => {
         last_name: personalCtx.last_name,
         email: personalCtx.email,
         phone: personalCtx.phone,
-        ...receivedSkillsInfo,
+        skills: skillsCtx.skillsInfo,
         work_preference: covidCtx.workType,
         had_covid: covidCtx.hadCovid,
         vaccinated: covidCtx.isVaccinated,
@@ -93,7 +93,7 @@ export const CollectInfoProvider = ({ children }) => {
         last_name: personalCtx.last_name,
         email: personalCtx.email,
         phone: personalCtx.phone,
-        ...receivedSkillsInfo,
+        skills: skillsCtx.skillsInfo,
         work_preference: covidCtx.workType,
         had_covid: covidCtx.hadCovid,
         vaccinated: covidCtx.isVaccinated,
@@ -102,7 +102,7 @@ export const CollectInfoProvider = ({ children }) => {
         something_special: insightsCtx.something_special,
       }));
     }
-  }, [receivedSkillsInfo, personalCtx, covidCtx, insightsCtx]);
+  }, [skillsCtx, personalCtx, covidCtx, insightsCtx]);
 
   return (
     <CollectInfoContext.Provider value={{ info }}>
