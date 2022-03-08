@@ -632,7 +632,7 @@ export const InsightsContext = createContext({
   something_special: '',
   pageIsValid: false,
   willOrganizeIsValid: false,
-  topicIsValid: false,
+  topicIsValid: true,
   specialIsValid: false,
   submitPage: () => {},
   changeWillOrganize: (e) => {},
@@ -647,6 +647,7 @@ const insightsReducer = (state, action) => {
       will_organize_devtalk: action.payload,
       willOrganizeIsValid: true,
       pageIsValid: state.topicIsValid && state.specialIsValid,
+      topicIsValid: action.payload === 'yes' && false,
     };
   }
   if (action.type === 'INPUT_TOPIC') {
@@ -693,7 +694,7 @@ export const InsightsProvider = ({ children }) => {
     something_special: '',
     pageIsValid: false,
     willOrganizeIsValid: false,
-    topicIsValid: false,
+    topicIsValid: true,
     specialIsValid: false,
     isSubmitted: false,
   });

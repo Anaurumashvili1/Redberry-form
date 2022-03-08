@@ -6,7 +6,7 @@ import PersonalInfoMain from './components/Form/PersonalInfo/PerosnalInfoMain';
 import SkillsMain from './components/Form/Skills/SkillsMain';
 import CovidMain from './components/Form/Covid/CovidMain';
 import InsightsMain from './components/Form/Insights/InsightsMain';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useContext } from 'react';
 import {
   SkillsProvider,
   PersonalInfoProvider,
@@ -14,11 +14,16 @@ import {
   InsightsProvider,
 } from './store/formContext';
 import { SwitcherProvider } from './store/switchPageContext';
-import { CollectInfoProvider } from './store/collectInfoContext';
+import {
+  CollectInfoProvider,
+  CollectInfoContext,
+} from './store/collectInfoContext';
+import axios from 'axios';
 
 function App() {
   const [isMainPath, setIsMainPath] = useState(false);
-
+  const { info } = useContext(CollectInfoContext);
+  console.log(info);
   const timeout = useCallback(() => {
     setTimeout(() => {
       setIsMainPath(true);

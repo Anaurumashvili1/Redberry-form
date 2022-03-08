@@ -11,7 +11,6 @@ const InsightsLeft = () => {
 
   const switcherCtx = useContext(SwitcherContext);
 
-  console.log(switcherCtx);
   return (
     <>
       <div className={classes.left}>
@@ -44,21 +43,23 @@ const InsightsLeft = () => {
               No
             </div>
           </div>
+          {ctx.will_organize_devtalk === 'yes' && (
+            <div>
+              <label htmlFor="devTalks" className={classes.devTalksLabel}>
+                What would you speak about at Devtalk?
+              </label>
+              <textarea
+                name="devTalks"
+                id="devTalks"
+                cols="36"
+                rows="4"
+                placeholder="I would..."
+                onChange={ctx.changeTopic}
+                value={ctx.devtalk_topic}
+              ></textarea>
+            </div>
+          )}
 
-          <div>
-            <label htmlFor="devTalks" className={classes.devTalksLabel}>
-              What would you speak about at Devtalk?
-            </label>
-            <textarea
-              name="devTalks"
-              id="devTalks"
-              cols="36"
-              rows="4"
-              placeholder="I would..."
-              onChange={ctx.changeTopic}
-              value={ctx.devtalk_topic}
-            ></textarea>
-          </div>
           <div>
             <label htmlFor="you" className={classes.devTalksLabel}>
               What would you speak about at Devtalk?
