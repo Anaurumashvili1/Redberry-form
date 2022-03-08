@@ -1,7 +1,6 @@
 import { createContext, useCallback } from 'react';
-import { useReducer, useState, useEffect, useContext } from 'react';
+import { useReducer, useState, useEffect } from 'react';
 import axios from 'axios';
-import { CollectInfoContext } from './collectInfoContext';
 // import useSubmit from '../hooks/use-submit';
 
 // validations for Skills page
@@ -171,9 +170,9 @@ export const SkillsProvider = ({ children }) => {
   const titleChanger = (e) => {
     dispatchTitle({ type: 'USER_INPUT', payload: e.target.value });
   };
-  const infoCtx = useContext(CollectInfoContext);
-  const skillsInfo = { skills: removedList.map((e) => e[0]) };
 
+  const skillsInfo = { skills: removedList.map((e) => e[0].id) };
+  console.log(skillsInfo);
   const submitPage = useCallback(() => {
     dispatchSkillsValidity({ type: 'SUBMIT' });
   }, []);
@@ -375,7 +374,7 @@ export const PersonalInfoProvider = ({ children }) => {
   const changeFirstName = (e) => {
     dispatchPersonalInfo({ type: 'FIRST_NAME_INPUT', payload: e.target.value });
   };
-  const firstNameBlur = (e) => {
+  const firstNameBlur = () => {
     dispatchPersonalInfo({ type: 'FIRST_NAME_BLUR' });
   };
   const changePhone = (e) => {
@@ -620,5 +619,113 @@ export const CovidPageProvider = ({ children }) => {
     <CovidContext.Provider value={{ ...covidContext }}>
       {children}
     </CovidContext.Provider>
+  );
+};
+
+export const InsightsContext = createContext({
+  will_organize_devtalk: null,
+  devtalk_topic: '',
+  something_special: '',
+  pageIsValid: false,
+  willOrganizeIsValid: false,
+  topicIsValid: false,
+  specialIsValid: false,
+  submitPage: () => {},
+  changeWillOrganize: (e) => {},
+  changeTopic: (e) => {},
+  changeSpecial: (e) => {},
+});
+
+const insightsReducer = (state, action) => {
+  if (action.type === 'INPUT_ORGANIZE') {
+    return {
+      ...state,
+      will_organize_devtalk: action.payload,
+      willOrganizeIsValid: true,
+      pageIsValid: state.topicIsValid && state.specialIsValid,
+    };
+  }
+  if (action.type === 'INPUT_TOPIC') {
+    return {
+      ...state,
+      devtalk_topic: action.payload,
+      topicIsValid: action.payload.length > 0,
+      pageIsValid:
+        state.willOrganizeIsValid &&
+        state.specialIsValid &&
+        action.payload.length > 0,
+    };
+  }
+
+  if (action.type === 'INPUT_SPECIAL') {
+    return {
+      ...state,
+      something_special: action.payload,
+      specialIsValid: action.payload.length > 0,
+      pageIsValid:
+        state.willOrganizeIsValid &&
+        action.payload.length > 0 &&
+        state.topicIsValid,
+    };
+  }
+  if (action.type === 'SUBMIT') {
+    return { ...state, isSubmitted: true };
+  }
+  return {
+    will_organize_devtalk: null,
+    devtalk_topic: '',
+    something_special: '',
+    pageIsValid: false,
+    willOrganizeIsValid: false,
+    topicIsValid: false,
+    specialIsValid: false,
+    isSubmitted: false,
+  };
+};
+export const InsightsProvider = ({ children }) => {
+  const [insightsState, dispatchInsights] = useReducer(insightsReducer, {
+    will_organize_devtalk: null,
+    devtalk_topic: '',
+    something_special: '',
+    pageIsValid: false,
+    willOrganizeIsValid: false,
+    topicIsValid: false,
+    specialIsValid: false,
+    isSubmitted: false,
+  });
+
+  const changeWillOrganize = (e) => {
+    dispatchInsights({ type: 'INPUT_ORGANIZE', payload: e.target.value });
+  };
+  const changeTopic = (e) => {
+    dispatchInsights({ type: 'INPUT_TOPIC', payload: e.target.value });
+  };
+  const changeSpecial = (e) => {
+    dispatchInsights({ type: 'INPUT_SPECIAL', payload: e.target.value });
+  };
+  const submitPage = () => {
+    dispatchInsights({ type: 'SUBMIT' });
+    console.log('submitted');
+  };
+
+  const insightsContext = {
+    submitPage,
+    changeWillOrganize,
+    changeTopic,
+    changeSpecial,
+    will_organize_devtalk: insightsState.will_organize_devtalk,
+    devtalk_topic: insightsState.devtalk_topic,
+    something_special: insightsState.something_special,
+    pageIsValid: insightsState.pageIsValid,
+    willOrganizeIsValid: insightsState.willOrganizeIsValid,
+    topicIsValid: insightsState.topicIsValid,
+    specialIsValid: insightsState.specialIsValid,
+    isSubmitted: insightsState.isSubmitted,
+  };
+
+  return (
+    <InsightsContext.Provider value={{ ...insightsContext }}>
+      {children}
+    </InsightsContext.Provider>
   );
 };

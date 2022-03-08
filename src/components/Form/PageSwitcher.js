@@ -8,6 +8,7 @@ import {
   SkillsContext,
   PersonalInfoContext,
   CovidContext,
+  InsightsContext,
 } from '../../store/formContext';
 
 const PageSwitcher = (props) => {
@@ -15,7 +16,7 @@ const PageSwitcher = (props) => {
   const skillsCtx = useContext(SkillsContext);
   const personalCtx = useContext(PersonalInfoContext);
   const covidCtx = useContext(CovidContext);
-
+  const insightsCtx = useContext(InsightsContext);
   return (
     <>
       <div className={classes.switcherWrapper}>
@@ -44,7 +45,7 @@ const PageSwitcher = (props) => {
           {' '}
           <img src={props.img4} alt="" />
         </Link>
-        <Link to="/submit">
+        <Link to={switcherCtx.submitPageLink} onClick={insightsCtx.submitPage}>
           {' '}
           <img src={props.img5} alt="" />
         </Link>

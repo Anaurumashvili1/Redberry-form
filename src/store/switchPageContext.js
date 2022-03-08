@@ -4,6 +4,7 @@ import {
   SkillsContext,
   PersonalInfoContext,
   CovidContext,
+  InsightsContext,
 } from './formContext';
 
 export const SwitcherContext = createContext({
@@ -13,12 +14,12 @@ export const SwitcherProvider = ({ children }) => {
   const skillsctx = useContext(SkillsContext);
   const personalctx = useContext(PersonalInfoContext);
   const covidCtx = useContext(CovidContext);
-
+  const insightsCtx = useContext(InsightsContext);
   const [covidPageLink, setCovidPageLink] = useState('');
   const [skillsPageLink, setSkillsPageLink] = useState('');
   const [insightsPageLink, setInsightsPageLink] = useState('');
   const [submitPageLink, setSubmitPageLink] = useState('');
-  console.log(covidCtx.pageIsValid);
+
   useEffect(() => {
     if (skillsctx.skillsContext.pageIsValid) {
       setCovidPageLink('/covid');
@@ -41,9 +42,20 @@ export const SwitcherProvider = ({ children }) => {
     } else setInsightsPageLink('');
   }, [covidCtx.pageIsValid]);
 
+  useEffect(() => {
+    if (insightsCtx.pageIsValid) {
+      setSubmitPageLink('/submit');
+    } else setSubmitPageLink('');
+  }, [insightsCtx.pageIsValid]);
+
   return (
     <SwitcherContext.Provider
-      value={{ covidPageLink, skillsPageLink, insightsPageLink }}
+      value={{
+        covidPageLink,
+        skillsPageLink,
+        insightsPageLink,
+        submitPageLink,
+      }}
     >
       {children}
     </SwitcherContext.Provider>

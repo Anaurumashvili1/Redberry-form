@@ -14,7 +14,7 @@ const SkillsLeft = () => {
   const ctx = context.skillsContext;
   const switcherCtx = useContext(SwitcherContext);
   const infoCtx = useContext(CollectInfoContext);
-  console.log(infoCtx.info);
+  // console.log(infoCtx.info);
   const pageValidationClasses = classes.required + ' ' + classes.requiredBottom;
 
   return (

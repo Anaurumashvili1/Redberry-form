@@ -1,6 +1,5 @@
 import classes from '../form.module.css';
 import PageSwitcher from '../PageSwitcher';
-import { useState } from 'react';
 import ellipse from '../../../EllipseRed.png';
 import lightEllipse from '../../../EllipseLight.png';
 import { CovidContext } from '../../../store/formContext';

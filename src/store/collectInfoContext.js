@@ -1,9 +1,10 @@
-import { createContext, useCallback, useContext } from 'react';
-import { useState, useEffect } from 'react';
+import { createContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import {
   SkillsContext,
   PersonalInfoContext,
   CovidContext,
+  InsightsContext,
 } from './formContext';
 
 export const CollectInfoContext = createContext({
@@ -16,6 +17,7 @@ export const CollectInfoProvider = ({ children }) => {
   const personalInfoContext = useContext(PersonalInfoContext);
   const personalCtx = personalInfoContext.personalContext;
   const covidCtx = useContext(CovidContext);
+  const insightsCtx = useContext(InsightsContext);
 
   const [info, setInfo] = useState({
     token: '23b05ea5-c77a-4096-92c2-d29670f23e0d',
@@ -48,6 +50,9 @@ export const CollectInfoProvider = ({ children }) => {
         had_covid_at: covidCtx.covidDate,
         vaccinated: covidCtx.isVaccinated,
         vaccinated_at: covidCtx.vaccineDate,
+        will_organize_devtalk: insightsCtx.will_organize_devtalk,
+        devtalk_topic: insightsCtx.devtalk_topic,
+        something_special: insightsCtx.something_special,
       }));
     } else if (covidCtx.hadCovid === 'yes') {
       setInfo((prevState) => ({
@@ -61,6 +66,9 @@ export const CollectInfoProvider = ({ children }) => {
         had_covid: covidCtx.hadCovid,
         had_covid_at: covidCtx.covidDate,
         vaccinated: covidCtx.isVaccinated,
+        will_organize_devtalk: insightsCtx.will_organize_devtalk,
+        devtalk_topic: insightsCtx.devtalk_topic,
+        something_special: insightsCtx.something_special,
       }));
     } else if (covidCtx.isVaccinated === 'yes') {
       setInfo((prevState) => ({
@@ -74,6 +82,9 @@ export const CollectInfoProvider = ({ children }) => {
         had_covid: covidCtx.hadCovid,
         vaccinated: covidCtx.isVaccinated,
         vaccinated_at: covidCtx.vaccineDate,
+        will_organize_devtalk: insightsCtx.will_organize_devtalk,
+        devtalk_topic: insightsCtx.devtalk_topic,
+        something_special: insightsCtx.something_special,
       }));
     } else {
       setInfo((prevState) => ({
@@ -86,9 +97,12 @@ export const CollectInfoProvider = ({ children }) => {
         work_preference: covidCtx.workType,
         had_covid: covidCtx.hadCovid,
         vaccinated: covidCtx.isVaccinated,
+        will_organize_devtalk: insightsCtx.will_organize_devtalk,
+        devtalk_topic: insightsCtx.devtalk_topic,
+        something_special: insightsCtx.something_special,
       }));
     }
-  }, [receivedSkillsInfo, personalCtx, covidCtx]);
+  }, [receivedSkillsInfo, personalCtx, covidCtx, insightsCtx]);
 
   return (
     <CollectInfoContext.Provider value={{ info }}>
