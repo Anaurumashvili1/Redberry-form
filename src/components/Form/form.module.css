@@ -155,3 +155,14 @@ textarea {
   font-size: 12px;
   margin: 0;
 }
+
+.requiredRadio {
+  margin-left: 5px;
+  bottom: 30px;
+  margin-bottom: -30px;
+}
+
+.dateRequired {
+  top: 10px;
+  margin: 0;
+}

@@ -445,22 +445,114 @@ export const CovidContext = createContext({
   isVaccinedChanger: (e) => {},
   covidDateChanger: (e) => {},
   vaccineDateChanger: (e) => {},
+  submitPage: () => {},
   pageIsValid: false,
+  workTypeIsValid: false,
+  hadCovidIsValid: true,
+  covidDateIsValid: false,
+  isVaccinatedIsValid: false,
+  vaccineDateIsValid: false,
+  isSubmitted: false,
 });
 
 const covidPageReducer = (state, action) => {
+  if (action.type === 'WORK_INPUT') {
+    return {
+      ...state,
+      workType: action.payload,
+      workTypeIsValid: true,
+      pageIsValid:
+        state.isVaccinatedIsValid &&
+        state.hadCovidIsValid &&
+        state.covidDateIsValid &&
+        state.vaccineDateIsValid,
+    };
+  }
+
+  if (action.type === 'COVID_INPUT') {
+    return {
+      ...state,
+      hadCovid: action.payload,
+      covidDate: action.payload === 'no' && null,
+      hadCovidIsValid: true,
+      covidDateIsValid: action.payload === 'yes' ? false : true,
+      pageIsValid:
+        state.workTypeIsValid &&
+        state.isVaccinatedIsValid &&
+        action.payload === 'yes'
+          ? false
+          : true && state.vaccineDateIsValid,
+    };
+  }
+
+  if (action.type === 'VACCINE_INPUT') {
+    return {
+      ...state,
+      isVaccinated: action.payload,
+      isVaccinatedIsValid: true,
+      vaccineDate: action.payload === 'no' && null,
+      vaccineDateIsValid: action.payload === 'yes' ? false : true,
+      pageIsValid:
+        state.isVaccinatedIsValid &&
+        state.hadCovidIsValid &&
+        state.covidDateIsValid &&
+        action.payload === 'yes'
+          ? false
+          : true && state.workTypeIsValid,
+    };
+  }
+  if (action.type === 'COVID_DATE') {
+    return {
+      ...state,
+      covidDate: action.payload,
+      covidDateIsValid: action.payload !== '',
+      pageIsValid:
+        state.isVaccinatedIsValid &&
+        state.hadCovidIsValid &&
+        state.vaccineDateIsValid &&
+        state.workTypeIsValid &&
+        action.payload !== '',
+    };
+  }
+  if (action.type === 'VACCINE_DATE') {
+    return {
+      ...state,
+      vaccineDate: action.payload,
+      vaccineDateIsValid: action.payload !== '',
+      pageIsValid:
+        state.isVaccinatedIsValid &&
+        state.hadCovidIsValid &&
+        action.payload !== '' &&
+        state.workTypeIsValid &&
+        action.payload !== '',
+    };
+  }
+
+  if (action.type === 'SUBMIT') {
+    return {
+      ...state,
+      isSubmitted: true,
+      pageIsValid: true,
+    };
+  }
+
   return {
     workType: '',
-    workTypeIsChosen: false,
     hadCovid: null,
     covidDate: '',
     isVaccinated: null,
     vaccineDate: '',
+    workTypeIsValid: false,
+    hadCovidIsValid: false,
+    covidDateIsValid: true,
+    isVaccinatedIsValid: false,
+    vaccineDateIsValid: true,
     pageIsValid: false,
+    isSubmitted: false,
   };
 };
 
-const CovidPageProvider = ({ children }) => {
+export const CovidPageProvider = ({ children }) => {
   const [covidPageState, dispatchCovidState] = useReducer(covidPageReducer, {
     workType: '',
     workTypeIsChosen: false,
@@ -470,6 +562,37 @@ const CovidPageProvider = ({ children }) => {
     vaccineDate: '',
     pageIsValid: false,
   });
+  const workTypeChanger = (e) => {
+    dispatchCovidState({ type: 'WORK_INPUT', payload: e.target.value });
+  };
+
+  const hadCovidChanger = (e) => {
+    dispatchCovidState({ type: 'COVID_INPUT', payload: e.target.value });
+  };
+
+  const isVaccinedChanger = (e) => {
+    dispatchCovidState({ type: 'VACCINE_INPUT', payload: e.target.value });
+  };
+
+  const covidDateChanger = (e) => {
+    dispatchCovidState({ type: 'COVID_DATE', payload: e.target.value });
+  };
+
+  const vaccineDateChanger = (e) => {
+    dispatchCovidState({ type: 'VACCINE_DATE', payload: e.target.value });
+  };
+
+  const submitPage = () => {
+    if (
+      covidPageState.workTypeIsValid &&
+      covidPageState.hadCovidIsValid &&
+      covidPageState.isVaccinatedIsValid &&
+      covidPageState.vaccineDateIsValid &&
+      covidPageState.covidDateIsValid
+    ) {
+      dispatchCovidState({ type: 'SUBMIT' });
+    }
+  };
 
   const covidContext = {
     workType: covidPageState.workType,
@@ -479,10 +602,22 @@ const CovidPageProvider = ({ children }) => {
     isVaccinated: covidPageState.isVaccinated,
     vaccineDate: covidPageState.vaccineDate,
     pageIsValid: covidPageState.pageIsValid,
+    workTypeIsValid: covidPageState.workTypeIsValid,
+    hadCovidIsValid: covidPageState.hadCovidIsValid,
+    covidDateIsValid: covidPageState.covidDateIsValid,
+    isVaccinatedIsValid: covidPageState.isVaccinatedIsValid,
+    vaccineDateIsValid: covidPageState.vaccineDateIsValid,
+    workTypeChanger,
+    hadCovidChanger,
+    isVaccinedChanger,
+    covidDateChanger,
+    vaccineDateChanger,
+    submitPage,
+    isSubmitted: covidPageState.isSubmitted,
   };
 
   return (
-    <CovidContext.Provider value={{ covidContext }}>
+    <CovidContext.Provider value={{ ...covidContext }}>
       {children}
     </CovidContext.Provider>
   );
