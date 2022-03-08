@@ -174,7 +174,7 @@ export const SkillsProvider = ({ children }) => {
 
   const skillsInfo = removedListMapped.map((e, i) => ({
     id: e.id,
-    experience: skillsValidityState.skillsArray[i].years,
+    experience: parseInt(skillsValidityState.skillsArray[i].years),
   }));
 
   const submitPage = useCallback(() => {
@@ -647,7 +647,7 @@ const insightsReducer = (state, action) => {
       will_organize_devtalk: action.payload,
       willOrganizeIsValid: true,
       pageIsValid: state.topicIsValid && state.specialIsValid,
-      topicIsValid: action.payload === 'yes' && false,
+      topicIsValid: action.payload === 'yes' ? false : true,
     };
   }
   if (action.type === 'INPUT_TOPIC') {
@@ -710,7 +710,6 @@ export const InsightsProvider = ({ children }) => {
   };
   const submitPage = () => {
     dispatchInsights({ type: 'SUBMIT' });
-    console.log('submitted');
   };
 
   const insightsContext = {

@@ -10,7 +10,7 @@ const InsightsLeft = () => {
   const ctx = useContext(InsightsContext);
 
   const switcherCtx = useContext(SwitcherContext);
-
+  console.log(ctx.topicIsValid);
   return (
     <>
       <div className={classes.left}>

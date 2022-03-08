@@ -2,9 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import { SubmitProvider } from './store/submitContext';
+
 ReactDOM.render(
   <React.StrictMode>
-    <App></App>
+    <SubmitProvider>
+      <App></App>
+    </SubmitProvider>{' '}
   </React.StrictMode>,
   document.getElementById('root')
 );

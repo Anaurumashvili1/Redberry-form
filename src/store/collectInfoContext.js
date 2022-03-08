@@ -46,11 +46,11 @@ export const CollectInfoProvider = ({ children }) => {
         phone: personalCtx.phone,
         skills: skillsCtx.skillsInfo,
         work_preference: covidCtx.workType,
-        had_covid: covidCtx.hadCovid,
+        had_covid: covidCtx.hadCovid === 'yes',
         had_covid_at: covidCtx.covidDate,
-        vaccinated: covidCtx.isVaccinated,
+        vaccinated: covidCtx.isVaccinated === 'yes',
         vaccinated_at: covidCtx.vaccineDate,
-        will_organize_devtalk: insightsCtx.will_organize_devtalk,
+        will_organize_devtalk: insightsCtx.will_organize_devtalk === 'yes',
         devtalk_topic: insightsCtx.devtalk_topic,
         something_special: insightsCtx.something_special,
       }));
@@ -63,10 +63,10 @@ export const CollectInfoProvider = ({ children }) => {
         phone: personalCtx.phone,
         skills: skillsCtx.skillsInfo,
         work_preference: covidCtx.workType,
-        had_covid: covidCtx.hadCovid,
+        had_covid: covidCtx.hadCovid === 'yes',
+        vaccinated: covidCtx.isVaccinated === 'yes',
         had_covid_at: covidCtx.covidDate,
-        vaccinated: covidCtx.isVaccinated,
-        will_organize_devtalk: insightsCtx.will_organize_devtalk,
+        will_organize_devtalk: insightsCtx.will_organize_devtalk === 'yes',
         devtalk_topic: insightsCtx.devtalk_topic,
         something_special: insightsCtx.something_special,
       }));
@@ -79,10 +79,10 @@ export const CollectInfoProvider = ({ children }) => {
         phone: personalCtx.phone,
         skills: skillsCtx.skillsInfo,
         work_preference: covidCtx.workType,
-        had_covid: covidCtx.hadCovid,
-        vaccinated: covidCtx.isVaccinated,
+        had_covid: covidCtx.hadCovid === 'yes',
+        vaccinated: covidCtx.isVaccinated === 'yes',
         vaccinated_at: covidCtx.vaccineDate,
-        will_organize_devtalk: insightsCtx.will_organize_devtalk,
+        will_organize_devtalk: insightsCtx.will_organize_devtalk === 'yes',
         devtalk_topic: insightsCtx.devtalk_topic,
         something_special: insightsCtx.something_special,
       }));
@@ -95,9 +95,9 @@ export const CollectInfoProvider = ({ children }) => {
         phone: personalCtx.phone,
         skills: skillsCtx.skillsInfo,
         work_preference: covidCtx.workType,
-        had_covid: covidCtx.hadCovid,
-        vaccinated: covidCtx.isVaccinated,
-        will_organize_devtalk: insightsCtx.will_organize_devtalk,
+        had_covid: covidCtx.hadCovid === 'yes',
+        vaccinated: covidCtx.isVaccinated === 'yes',
+        will_organize_devtalk: insightsCtx.will_organize_devtalk === 'yes',
         devtalk_topic: insightsCtx.devtalk_topic,
         something_special: insightsCtx.something_special,
       }));
@@ -105,7 +105,7 @@ export const CollectInfoProvider = ({ children }) => {
   }, [skillsCtx, personalCtx, covidCtx, insightsCtx]);
 
   return (
-    <CollectInfoContext.Provider value={{ info }}>
+    <CollectInfoContext.Provider value={{ info, setInfo }}>
       {children}
     </CollectInfoContext.Provider>
   );

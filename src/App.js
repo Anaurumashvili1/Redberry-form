@@ -6,7 +6,7 @@ import PersonalInfoMain from './components/Form/PersonalInfo/PerosnalInfoMain';
 import SkillsMain from './components/Form/Skills/SkillsMain';
 import CovidMain from './components/Form/Covid/CovidMain';
 import InsightsMain from './components/Form/Insights/InsightsMain';
-import { useState, useCallback, useContext } from 'react';
+import { useContext } from 'react';
 import {
   SkillsProvider,
   PersonalInfoProvider,
@@ -14,21 +14,12 @@ import {
   InsightsProvider,
 } from './store/formContext';
 import { SwitcherProvider } from './store/switchPageContext';
-import {
-  CollectInfoProvider,
-  CollectInfoContext,
-} from './store/collectInfoContext';
-import axios from 'axios';
+import { CollectInfoProvider } from './store/collectInfoContext';
+import { SubmitContext } from './store/submitContext';
 
 function App() {
-  const [isMainPath, setIsMainPath] = useState(false);
-  const { info } = useContext(CollectInfoContext);
-  console.log(info);
-  const timeout = useCallback(() => {
-    setTimeout(() => {
-      setIsMainPath(true);
-    }, 3000);
-  }, []);
+  const submitCtx = useContext(SubmitContext);
+
   return (
     <div className="App">
       <InsightsProvider>
@@ -47,12 +38,9 @@ function App() {
                       <Route path="/skills" element={<SkillsMain />} />
                       <Route path="/covid" element={<CovidMain />} />
                       <Route path="/insights" element={<InsightsMain />} />
-                      <Route
-                        path="/submit"
-                        element={<Submit timeout={timeout} />}
-                      />
+                      <Route path="/submit" element={<Submit />} />
 
-                      {!isMainPath ? (
+                      {!submitCtx.isMainPath ? (
                         <Route
                           path="/thank-you"
                           element={<ThankYouPage />}
