@@ -3,7 +3,9 @@ import PageSwitcher from '../PageSwitcher';
 import { useState } from 'react';
 import ellipse from '../../../EllipseRed.png';
 import lightEllipse from '../../../EllipseLight.png';
+
 const formClasses = classes.form + ' ' + classes.formCovid;
+
 const CovidLeft = () => {
   const [covidAnswer, setCovidAnswer] = useState('');
   const [vaccineAnswer, setVaccineAnswer] = useState('');
@@ -27,7 +29,7 @@ const CovidLeft = () => {
               />
               From Sairme Office
             </div>
-            <div div className={classes.inputText}>
+            <div className={classes.inputText}>
               <input
                 className={classes.radioInput}
                 type="radio"
@@ -37,7 +39,7 @@ const CovidLeft = () => {
               />
               From Home
             </div>
-            <div div className={classes.inputText}>
+            <div className={classes.inputText}>
               <input
                 className={classes.radioInput}
                 type="radio"
@@ -53,7 +55,7 @@ const CovidLeft = () => {
             onChange={(e) => setCovidAnswer(e.target.value)}
           >
             <label htmlFor="covid">Did you contact covid 19? :(</label>
-            <div div className={classes.inputText}>
+            <div className={classes.inputText}>
               {' '}
               <input
                 className={classes.radioInput}
@@ -64,7 +66,7 @@ const CovidLeft = () => {
               />
               Yes
             </div>
-            <div div className={classes.inputText}>
+            <div className={classes.inputText}>
               <input
                 className={classes.radioInput}
                 type="radio"
@@ -89,7 +91,7 @@ const CovidLeft = () => {
             onChange={(e) => setVaccineAnswer(e.target.value)}
           >
             <label htmlFor="vaccine">Have you been vaccinated?</label>
-            <div div className={classes.inputText}>
+            <div className={classes.inputText}>
               <input
                 className={classes.radioInput}
                 type="radio"
@@ -99,7 +101,7 @@ const CovidLeft = () => {
               />
               Yes
             </div>
-            <div div className={classes.inputText}>
+            <div className={classes.inputText}>
               <input
                 className={classes.radioInput}
                 type="radio"
@@ -126,7 +128,7 @@ const CovidLeft = () => {
           img2={ellipse}
           img3={ellipse}
           img4={lightEllipse}
-          img4={lightEllipse}
+          img5={lightEllipse}
         ></PageSwitcher>
       </div>
     </>

@@ -4,6 +4,7 @@ import axios from 'axios';
 import { CollectInfoContext } from './collectInfoContext';
 // import useSubmit from '../hooks/use-submit';
 
+// validations for Skills page
 export const SkillsContext = createContext({
   skillTitle: 'Skill',
   skillSelected: false,
@@ -202,5 +203,287 @@ export const SkillsProvider = ({ children }) => {
     <SkillsContext.Provider value={{ skillsContext }}>
       {children}
     </SkillsContext.Provider>
+  );
+};
+
+//validations for Persoonal Info page
+
+export const PersonalInfoContext = createContext({
+  firstName: '',
+  lastName: '',
+  email: '',
+  phone: '',
+  firstNameIsValid: false,
+  lastNameIsValid: false,
+  emailIsValid: false,
+  phoneIsValid: true,
+  pageIsValid: false,
+  isSubmitted: false,
+  firstNameIsTouched: false,
+  lastNameIsTouched: false,
+  emailIsTouched: false,
+  changeEmail: (e) => {},
+  changeFirstName: (e) => {},
+  changePhone: (e) => {},
+  changeLastName: (e) => {},
+  emailBlur: () => {},
+  firstNameBlur: () => {},
+  lastNameBlur: () => {},
+  phoneBlur: () => {},
+  submitPage: () => {},
+  phoneIsTouched: false,
+});
+
+const personalInfoReducer = (state, action) => {
+  if (action.type === 'FIRST_NAME_INPUT') {
+    return {
+      ...state,
+      first_name: action.payload,
+    };
+  }
+  if (action.type === 'FIRST_NAME_BLUR') {
+    return {
+      ...state,
+      firstNameIsValid: state.first_name.length >= 2,
+      firstNameIsTouched: true,
+      pageIsValid:
+        state.first_name.length >= 2 &&
+        state.lastNameIsValid &&
+        state.phoneNumberIsValid &&
+        state.emailIsValid,
+    };
+  }
+  if (action.type === 'LAST_NAME_INPUT') {
+    return {
+      ...state,
+      last_name: action.payload,
+    };
+  }
+  if (action.type === 'LAST_NAME_BLUR') {
+    return {
+      ...state,
+      lastNameIsValid: state.last_name.length >= 2,
+      lastNameIsTouched: true,
+      pageIsValid:
+        state.last_name.length >= 2 &&
+        state.firstNameIsValid &&
+        state.phoneNumberIsValid &&
+        state.emailIsValid,
+    };
+  }
+  if (action.type === 'EMAIL_INPUT') {
+    return {
+      ...state,
+      email: action.payload,
+    };
+  }
+  if (action.type === 'EMAIL_BLUR') {
+    return {
+      ...state,
+      emailIsTouched: true,
+      pageIsValid:
+        !!state.email.match(/^[\w-.]+@([\w-]+\.)+[\w-]/g) &&
+        state.firstNameIsValid &&
+        state.phoneNumberIsValid &&
+        state.lastNameIsValid,
+
+      emailIsValid: !!state.email.match(/^[\w-.]+@([\w-]+\.)+[\w-]/g),
+    };
+  }
+
+  if (action.type === 'PHONE_INPUT') {
+    return { ...state, phone: action.payload };
+  }
+  if (action.type === 'PHONE_BLUR') {
+    return {
+      ...state,
+      phoneIsTouched: true,
+      phoneNumberIsValid:
+        state.phone.length > 0
+          ? !!state.phone.match(
+              /^(?:(?:\+)995[\s.-]{0,1}(?:\(0\)[\s.-]{0,1})?)[5](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/gm
+            )
+          : true,
+      pageIsValid:
+        (state.phone.length > 0
+          ? !!state.phone.match(
+              /^(?:(?:\+)995[\s.-]{0,1}(?:\(0\)[\s.-]{0,1})?)[5](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/gm
+            )
+          : true) &&
+        state.emailIsValid &&
+        state.firstNameIsValid &&
+        state.lastNameIsValid,
+    };
+  }
+
+  if (action.type === 'SUBMIT') {
+    return {
+      ...state,
+      pageIsValid:
+        state.firstNameIsValid &&
+        state.lastNameIsValid &&
+        state.phoneNumberIsValid &&
+        state.emailIsValid,
+    };
+  }
+
+  return {
+    first_name: '',
+    last_name: '',
+    email: '',
+    phone: '',
+    firstNameIsValid: false,
+    lastNameIsValid: false,
+    emailIsValid: false,
+    phoneNumberIsValid: true,
+    isSubmitted: false,
+    firstNameIsTouched: false,
+    lastNameIsTouched: false,
+    emailIsTouched: false,
+    phoneIsTouched: false,
+    pageIsValid: false,
+  };
+};
+
+export const PersonalInfoProvider = ({ children }) => {
+  const [personalInfoState, dispatchPersonalInfo] = useReducer(
+    personalInfoReducer,
+    {
+      first_name: '',
+      last_name: '',
+      email: '',
+      phone: '',
+      firstNameIsValid: false,
+      lastNameIsValid: false,
+      emailIsValid: false,
+      phoneNumberIsValid: true,
+      isSubmitted: false,
+      firstNameIsTouched: false,
+      lastNameIsTouched: false,
+      emailIsTouched: false,
+      phoneIsTouched: false,
+      pageIsValid: false,
+    }
+  );
+
+  const changeEmail = (e) => {
+    dispatchPersonalInfo({ type: 'EMAIL_INPUT', payload: e.target.value });
+  };
+  const emailBlur = () => {
+    dispatchPersonalInfo({ type: 'EMAIL_BLUR' });
+  };
+  const changeFirstName = (e) => {
+    dispatchPersonalInfo({ type: 'FIRST_NAME_INPUT', payload: e.target.value });
+  };
+  const firstNameBlur = (e) => {
+    dispatchPersonalInfo({ type: 'FIRST_NAME_BLUR' });
+  };
+  const changePhone = (e) => {
+    dispatchPersonalInfo({ type: 'PHONE_INPUT', payload: e.target.value });
+  };
+  const phoneBlur = () => {
+    dispatchPersonalInfo({ type: 'PHONE_BLUR' });
+  };
+  const changeLastName = (e) => {
+    dispatchPersonalInfo({ type: 'LAST_NAME_INPUT', payload: e.target.value });
+  };
+  const lastNameBlur = () => {
+    dispatchPersonalInfo({ type: 'LAST_NAME_BLUR' });
+  };
+
+  const submitPage = () => {
+    if (
+      personalInfoState.emailIsValid &&
+      personalInfoState.phoneNumberIsValid &&
+      personalInfoState.firstNameIsValid &&
+      personalInfoState.lastNameIsValid
+    ) {
+      dispatchPersonalInfo({ type: 'SUBMIT' });
+    }
+  };
+  const personalContext = {
+    first_name: personalInfoState.first_name,
+    last_name: personalInfoState.last_name,
+    email: personalInfoState.email,
+    phone: personalInfoState.phone,
+    firstNameIsValid: personalInfoState.firstNameIsValid,
+    lastNameIsValid: personalInfoState.lastNameIsValid,
+    emailIsValid: personalInfoState.emailIsValid,
+    phoneNumberIsValid: personalInfoState.phoneNumberIsValid,
+    changeEmail,
+    changeFirstName,
+    changePhone,
+    changeLastName,
+    emailBlur,
+    firstNameBlur,
+    lastNameBlur,
+    phoneBlur,
+    submitPage,
+    isSubmitted: personalInfoState.isSubmitted,
+    firstNameIsTouched: personalInfoState.firstNameIsTouched,
+    lastNameIsTouched: personalInfoState.lastNameIsTouched,
+    emailIsTouched: personalInfoState.emailIsTouched,
+    phoneIsTouched: personalInfoState.phoneIsTouched,
+    pageIsValid: personalInfoState.pageIsValid,
+  };
+  return (
+    <PersonalInfoContext.Provider value={{ personalContext }}>
+      {children}
+    </PersonalInfoContext.Provider>
+  );
+};
+
+export const CovidContext = createContext({
+  workType: '',
+  workTypeIsChosen: false,
+  hadCovid: null,
+  covidDate: '',
+  isVaccinated: null,
+  vaccineDate: '',
+  workTypeChanger: (e) => {},
+  hadCovidChanger: (e) => {},
+  isVaccinedChanger: (e) => {},
+  covidDateChanger: (e) => {},
+  vaccineDateChanger: (e) => {},
+  pageIsValid: false,
+});
+
+const covidPageReducer = (state, action) => {
+  return {
+    workType: '',
+    workTypeIsChosen: false,
+    hadCovid: null,
+    covidDate: '',
+    isVaccinated: null,
+    vaccineDate: '',
+    pageIsValid: false,
+  };
+};
+
+const CovidPageProvider = ({ children }) => {
+  const [covidPageState, dispatchCovidState] = useReducer(covidPageReducer, {
+    workType: '',
+    workTypeIsChosen: false,
+    hadCovid: null,
+    covidDate: '',
+    isVaccinated: null,
+    vaccineDate: '',
+    pageIsValid: false,
+  });
+
+  const covidContext = {
+    workType: covidPageState.workType,
+    workTypeIsChosen: covidPageState.workTypeIsChosen,
+    hadCovid: covidPageState.hadCovid,
+    covidDate: covidPageState.covidDate,
+    isVaccinated: covidPageState.isVaccinated,
+    vaccineDate: covidPageState.vaccineDate,
+    pageIsValid: covidPageState.pageIsValid,
+  };
+
+  return (
+    <CovidContext.Provider value={{ covidContext }}>
+      {children}
+    </CovidContext.Provider>
   );
 };

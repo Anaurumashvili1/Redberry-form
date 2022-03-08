@@ -4,11 +4,13 @@ import next from '../../Next.png';
 import { Link } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import { SwitcherContext } from '../../store/switchPageContext';
-import { SkillsContext } from '../../store/formContext';
+import { SkillsContext, PersonalInfoContext } from '../../store/formContext';
 
 const PageSwitcher = (props) => {
   const switcherCtx = useContext(SwitcherContext);
   const skillsCtx = useContext(SkillsContext);
+  const personalCtx = useContext(PersonalInfoContext);
+
   return (
     <>
       <div className={classes.switcherWrapper}>
@@ -19,7 +21,10 @@ const PageSwitcher = (props) => {
         <Link to="/personal">
           <img src={props.img} alt="" />
         </Link>
-        <Link to="/skills">
+        <Link
+          to={switcherCtx.skillsPageLink}
+          onClick={personalCtx.personalContext.submitPage}
+        >
           <img src={props.img2} alt="" />
         </Link>
 

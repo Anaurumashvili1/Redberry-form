@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext } from 'react';
 import { useState, useEffect } from 'react';
-import { SkillsContext } from './formContext';
+import { SkillsContext, PersonalInfoContext } from './formContext';
 
 export const CollectInfoContext = createContext({
   info: {},
@@ -25,13 +25,20 @@ export const CollectInfoProvider = ({ children }) => {
     // devtalk_topic: '',
     // something_special: '',
   });
-  const receivedInfo = ctx.skillsContext.skillsInfo;
+  const receivedSkillsInfo = ctx.skillsContext.skillsInfo;
+  const personalInfoContext = useContext(PersonalInfoContext);
+  const personalCtx = personalInfoContext.personalContext;
+
   useEffect(() => {
     setInfo((prevState) => ({
       ...prevState,
-      ...receivedInfo,
+      first_name: personalCtx.first_name,
+      last_name: personalCtx.last_name,
+      email: personalCtx.email,
+      phone: personalCtx.phone,
+      ...receivedSkillsInfo,
     }));
-  }, [receivedInfo]);
+  }, [receivedSkillsInfo, personalCtx]);
 
   return (
     <CollectInfoContext.Provider value={{ info }}>
