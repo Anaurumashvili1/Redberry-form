@@ -7,8 +7,7 @@ import { PersonalInfoContext } from '../../../store/formContext';
 import { SwitcherContext } from '../../../store/switchPageContext';
 
 const PersonalInfoLeft = () => {
-  const context = useContext(PersonalInfoContext);
-  const ctx = context.personalContext;
+  const ctx = useContext(PersonalInfoContext);
   const switcherCtx = useContext(SwitcherContext);
 
   const h1Classes = classes.title + ' ' + classes.titleFirst;

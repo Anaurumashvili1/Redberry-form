@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap');
+
+.main {
+  background: radial-gradient(50% 50% at 50% 50%, #0c0d0e 0%, #151718 73.44%);
+  height: 100vh;
+  overflow-y: scroll;
+}
+.applications {
+  width: 1154px;
+  margin: auto;
+}
+
+.applicationHead {
+  color: white;
+  padding-left: 27px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: calc(100% - 27px);
+  height: 52px;
+  margin-bottom: 12px;
+  background-color: #fe3b1f;
+}
+.applicationHead img {
+  align-self: center;
+  margin-right: 20px;
+}
+.application {
+  background-color: white;
+}
+.applicationBody {
+  height: 1540px;
+}
+.title {
+  width: 1154px;
+  height: 100px;
+  text-align: left;
+  font-weight: 700;
+  margin: auto;
+  color: white;
+  font-size: 56px;
+  letter-spacing: 11%;
+  font-family: 'Rowdies';
+  padding-top: 95px;
+}
+.applicationHeadAltered {
+  background-color: #f05039;
+  margin-top: 21px;
+}
+
+.personalInfoAndSkills,
+.covidAndInsights {
+  display: flex;
+  margin-top: 40px;
+  width: 750px;
+  gap: 160px;
+  margin-left: 163px;
+}
+.h3title {
+  font-size: 18px;
+  color: #fe3b1f;
+  margin-bottom: 45px;
+  width: fit-content;
+  text-decoration: underline;
+  font-style: italic;
+  font-weight: normal;
+}
+.personal,
+.skills,
+.covid,
+.insights {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 350px;
+  margin-bottom: 85px;
+}
+
+.personal p,
+span,
+.skills p,
+span {
+  font-size: 14px;
+  font-style: italic;
+}
+/* .item {
+  display: flex;
+  gap: 40px;
+}
+
+.item p {
+  text-align: left;
+  width: fit-content;
+} */
+.personalInfo,
+.skillsInfo {
+  display: flex;
+  gap: 45px;
+}
+.keys,
+.values {
+  display: flex;
+  flex-direction: column;
+  gap: 51px;
+}
+
+.covidRadio input {
+  display: initial;
+  position: relative;
+  top: 12px;
+  margin-right: 7px;
+  font-size: 14px;
+  height: 35px;
+  margin-left: 10px;
+  width: initial;
+}
+.covidRadio {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.covidRadio div {
+  font-size: 14px;
+}
+
+.radio[disabled] {
+  opacity: 1;
+  background-image: white;
+}

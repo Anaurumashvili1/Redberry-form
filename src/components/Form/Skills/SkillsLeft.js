@@ -10,8 +10,7 @@ import { CollectInfoContext } from '../../../store/collectInfoContext';
 // import useSubmit from '../../../hooks/use-submit';
 
 const SkillsLeft = () => {
-  const context = useContext(SkillsContext);
-  const ctx = context.skillsContext;
+  const ctx = useContext(SkillsContext);
   const switcherCtx = useContext(SwitcherContext);
   const infoCtx = useContext(CollectInfoContext);
   console.log(infoCtx.info);

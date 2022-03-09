@@ -12,32 +12,22 @@ export const CollectInfoContext = createContext({
 });
 
 export const CollectInfoProvider = ({ children }) => {
-  const ctx = useContext(SkillsContext);
-  const skillsCtx = ctx.skillsContext;
-  const personalInfoContext = useContext(PersonalInfoContext);
-  const personalCtx = personalInfoContext.personalContext;
+  const skillsCtx = useContext(SkillsContext);
+  const personalCtx = useContext(PersonalInfoContext);
   const covidCtx = useContext(CovidContext);
   const insightsCtx = useContext(InsightsContext);
 
   const [info, setInfo] = useState({
     token: '23b05ea5-c77a-4096-92c2-d29670f23e0d',
-    // first_name: '',
-    // last_name: '',
-    // email: '',
-    // phone: '',
-    // skills: [],
-    // work_preference: '',
-    // had_covid: null,
-    // had_covid_at: '',
-    // vaccinated: null,
-    // vaccinated_at: '',
-    // will_organize_devtalk: null,
-    // devtalk_topic: '',
-    // something_special: '',
   });
 
   useEffect(() => {
-    if (covidCtx.hadCovid === 'yes' && covidCtx.isVaccinated === 'yes') {
+    if (
+      covidCtx.hadCovid === 'yes' &&
+      covidCtx.isVaccinated === 'yes' &&
+      insightsCtx.devtalk_topic !== '' &&
+      personalCtx.phone !== ''
+    ) {
       setInfo((prevState) => ({
         ...prevState,
         first_name: personalCtx.first_name,
@@ -47,14 +37,55 @@ export const CollectInfoProvider = ({ children }) => {
         skills: skillsCtx.skillsInfo,
         work_preference: covidCtx.workType,
         had_covid: covidCtx.hadCovid === 'yes',
+        had_covid_at: covidCtx.covidDate === null ? '' : covidCtx.covidDate,
+        vaccinated: covidCtx.isVaccinated === 'yes',
+        vaccinated_at:
+          covidCtx.vaccineDate === null ? '' : covidCtx.vaccineDate,
+        will_organize_devtalk: insightsCtx.will_organize_devtalk === 'yes',
+        devtalk_topic: insightsCtx.devtalk_topic,
+        something_special: insightsCtx.something_special,
+      }));
+    } else if (
+      covidCtx.hadCovid === 'yes' &&
+      insightsCtx.devtalk_topic !== '' &&
+      personalCtx.phone !== ''
+    ) {
+      setInfo((prevState) => ({
+        ...prevState,
+        first_name: personalCtx.first_name,
+        last_name: personalCtx.last_name,
+        email: personalCtx.email,
+        phone: personalCtx.phone,
+        skills: skillsCtx.skillsInfo,
+        work_preference: covidCtx.workType,
+        had_covid: covidCtx.hadCovid === 'yes',
+        vaccinated: covidCtx.isVaccinated === 'yes',
         had_covid_at: covidCtx.covidDate,
+        will_organize_devtalk: insightsCtx.will_organize_devtalk === 'yes',
+        devtalk_topic: insightsCtx.devtalk_topic,
+        something_special: insightsCtx.something_special,
+      }));
+    } else if (
+      covidCtx.isVaccinated === 'yes' &&
+      insightsCtx.devtalk_topic !== '' &&
+      personalCtx.phone !== ''
+    ) {
+      setInfo((prevState) => ({
+        ...prevState,
+        first_name: personalCtx.first_name,
+        last_name: personalCtx.last_name,
+        email: personalCtx.email,
+        phone: personalCtx.phone,
+        skills: skillsCtx.skillsInfo,
+        work_preference: covidCtx.workType,
+        had_covid: covidCtx.hadCovid === 'yes',
         vaccinated: covidCtx.isVaccinated === 'yes',
         vaccinated_at: covidCtx.vaccineDate,
         will_organize_devtalk: insightsCtx.will_organize_devtalk === 'yes',
         devtalk_topic: insightsCtx.devtalk_topic,
         something_special: insightsCtx.something_special,
       }));
-    } else if (covidCtx.hadCovid === 'yes') {
+    } else if (insightsCtx.devtalk_topic !== '' && personalCtx.phone !== '') {
       setInfo((prevState) => ({
         ...prevState,
         first_name: personalCtx.first_name,
@@ -65,12 +96,25 @@ export const CollectInfoProvider = ({ children }) => {
         work_preference: covidCtx.workType,
         had_covid: covidCtx.hadCovid === 'yes',
         vaccinated: covidCtx.isVaccinated === 'yes',
-        had_covid_at: covidCtx.covidDate,
         will_organize_devtalk: insightsCtx.will_organize_devtalk === 'yes',
         devtalk_topic: insightsCtx.devtalk_topic,
         something_special: insightsCtx.something_special,
       }));
-    } else if (covidCtx.isVaccinated === 'yes') {
+    } else if (insightsCtx.devtalk_topic !== '') {
+      setInfo((prevState) => ({
+        ...prevState,
+        first_name: personalCtx.first_name,
+        last_name: personalCtx.last_name,
+        email: personalCtx.email,
+        skills: skillsCtx.skillsInfo,
+        work_preference: covidCtx.workType,
+        had_covid: covidCtx.hadCovid === 'yes',
+        vaccinated: covidCtx.isVaccinated === 'yes',
+        will_organize_devtalk: insightsCtx.will_organize_devtalk === 'yes',
+        devtalk_topic: insightsCtx.devtalk_topic,
+        something_special: insightsCtx.something_special,
+      }));
+    } else if (personalCtx.phone !== '') {
       setInfo((prevState) => ({
         ...prevState,
         first_name: personalCtx.first_name,
@@ -81,9 +125,7 @@ export const CollectInfoProvider = ({ children }) => {
         work_preference: covidCtx.workType,
         had_covid: covidCtx.hadCovid === 'yes',
         vaccinated: covidCtx.isVaccinated === 'yes',
-        vaccinated_at: covidCtx.vaccineDate,
         will_organize_devtalk: insightsCtx.will_organize_devtalk === 'yes',
-        devtalk_topic: insightsCtx.devtalk_topic,
         something_special: insightsCtx.something_special,
       }));
     } else {
@@ -92,13 +134,11 @@ export const CollectInfoProvider = ({ children }) => {
         first_name: personalCtx.first_name,
         last_name: personalCtx.last_name,
         email: personalCtx.email,
-        phone: personalCtx.phone,
         skills: skillsCtx.skillsInfo,
         work_preference: covidCtx.workType,
         had_covid: covidCtx.hadCovid === 'yes',
         vaccinated: covidCtx.isVaccinated === 'yes',
         will_organize_devtalk: insightsCtx.will_organize_devtalk === 'yes',
-        devtalk_topic: insightsCtx.devtalk_topic,
         something_special: insightsCtx.something_special,
       }));
     }

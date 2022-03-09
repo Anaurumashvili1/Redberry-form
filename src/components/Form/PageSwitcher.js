@@ -27,17 +27,11 @@ const PageSwitcher = (props) => {
         <Link to="/personal">
           <img src={props.img} alt="" />
         </Link>
-        <Link
-          to={switcherCtx.skillsPageLink}
-          onClick={personalCtx.personalContext.submitPage}
-        >
+        <Link to={switcherCtx.skillsPageLink} onClick={personalCtx.submitPage}>
           <img src={props.img2} alt="" />
         </Link>
 
-        <Link
-          to={switcherCtx.covidPageLink}
-          onClick={skillsCtx.skillsContext.submitPage}
-        >
+        <Link to={switcherCtx.covidPageLink} onClick={skillsCtx.submitPage}>
           {' '}
           <img src={props.img3} alt="" />
         </Link>

@@ -16,6 +16,7 @@ import {
 import { SwitcherProvider } from './store/switchPageContext';
 import { CollectInfoProvider } from './store/collectInfoContext';
 import { SubmitContext } from './store/submitContext';
+import Applications from './components/Applications/Applications';
 
 function App() {
   const submitCtx = useContext(SubmitContext);
@@ -39,7 +40,7 @@ function App() {
                       <Route path="/covid" element={<CovidMain />} />
                       <Route path="/insights" element={<InsightsMain />} />
                       <Route path="/submit" element={<Submit />} />
-
+                      <Route path="/applications" element={<Applications />} />
                       {!submitCtx.isMainPath ? (
                         <Route
                           path="/thank-you"

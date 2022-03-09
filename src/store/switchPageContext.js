@@ -21,20 +21,20 @@ export const SwitcherProvider = ({ children }) => {
   const [submitPageLink, setSubmitPageLink] = useState('');
 
   useEffect(() => {
-    if (skillsctx.skillsContext.pageIsValid) {
+    if (skillsctx.pageIsValid) {
       setCovidPageLink('/covid');
     } else {
       setCovidPageLink('');
     }
-  }, [skillsctx.skillsContext.pageIsValid]);
+  }, [skillsctx.pageIsValid]);
 
   useEffect(() => {
-    if (personalctx.personalContext.pageIsValid) {
+    if (personalctx.pageIsValid) {
       setSkillsPageLink('/skills');
     } else {
       setSkillsPageLink('');
     }
-  }, [personalctx.personalContext.pageIsValid]);
+  }, [personalctx.pageIsValid]);
 
   useEffect(() => {
     if (covidCtx.pageIsValid) {

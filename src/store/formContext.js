@@ -203,7 +203,7 @@ export const SkillsProvider = ({ children }) => {
     skillsInfo,
   };
   return (
-    <SkillsContext.Provider value={{ skillsContext }}>
+    <SkillsContext.Provider value={{ ...skillsContext }}>
       {children}
     </SkillsContext.Provider>
   );
@@ -430,7 +430,7 @@ export const PersonalInfoProvider = ({ children }) => {
     pageIsValid: personalInfoState.pageIsValid,
   };
   return (
-    <PersonalInfoContext.Provider value={{ personalContext }}>
+    <PersonalInfoContext.Provider value={{ ...personalContext }}>
       {children}
     </PersonalInfoContext.Provider>
   );
