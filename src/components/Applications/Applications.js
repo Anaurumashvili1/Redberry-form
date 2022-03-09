@@ -7,6 +7,10 @@ import SelectedInput from '../../images/selectedInput.png';
 import radioInput from '../../images/radiobutton.png';
 import date from '../../images/date.png';
 
+// const reducer =  (action,state)=>{
+//   return{applicationsArray:[],clicked:[],skillsOutput:[]}
+// }
+
 const Applications = () => {
   const [applicationsArray, setApplicationsArray] = useState([]);
   const [clicked, setClicked] = useState([]);
@@ -16,7 +20,7 @@ const Applications = () => {
   useEffect(() => {
     axios
       .get(
-        'https://bootcamp-2022.devtest.ge/api/applications?token=23b05ea5-c77a-4096-92c2-d29670f23e0d'
+        'https://bootcamp-2022.devtest.ge/api/applications?token=a9e7625e-babd-4585-a2bc-933db60b1872'
       )
       .then((resp) => {
         setApplicationsArray(resp.data);
@@ -27,15 +31,19 @@ const Applications = () => {
   useEffect(() => {
     const mappedSkills = applicationsArray.map((app) => app.skills);
     if (mappedSkills.length > 0 && skills.length > 0) {
+      console.log(mappedSkills, skills);
       setSkillsOutput(
         mappedSkills.map((skill) =>
           skill.map((entry) => ({
             ...entry,
-            title: skills.find((skill) => skill.id === entry.id).title,
+            title:
+              skills.find((skill) => skill.id === entry.id) === undefined
+                ? 'k'
+                : skills.find((skill) => skill.id === entry.id).title,
           }))
         )
       );
-    }
+    } else setSkillsOutput([]);
   }, [skills, applicationsArray]);
 
   const handleClick = (value, index) => {
@@ -97,12 +105,14 @@ const Applications = () => {
                       <div className={classes.skillsInfo}>
                         <div className={classes.keys}>
                           {skillsOutput[index].map((skill) => (
-                            <p>{skill.title}</p>
+                            <p key={skill.id}>{skill.title}</p>
                           ))}
                         </div>
                         <div className={classes.values}>
                           {skillsOutput[index].map((skill) => (
-                            <p>years of experience: {skill.experience}</p>
+                            <p key={skill.id}>
+                              years of experience: {skill.experience}
+                            </p>
                           ))}
                         </div>
                       </div>

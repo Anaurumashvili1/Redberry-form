@@ -18,7 +18,7 @@ export const CollectInfoProvider = ({ children }) => {
   const insightsCtx = useContext(InsightsContext);
 
   const [info, setInfo] = useState({
-    token: '23b05ea5-c77a-4096-92c2-d29670f23e0d',
+    token: 'a9e7625e-babd-4585-a2bc-933db60b1872',
   });
 
   useEffect(() => {
