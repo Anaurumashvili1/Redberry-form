@@ -4,11 +4,21 @@ import { Link } from 'react-router-dom';
 import { useCallback, useContext } from 'react';
 import { CollectInfoContext } from '../../store/collectInfoContext';
 import { SubmitContext } from '../../store/submitContext';
+import {
+  PersonalInfoContext,
+  SkillsContext,
+  CovidContext,
+  InsightsContext,
+} from '../../store/formContext';
 import axios from 'axios';
 
 const Submit = () => {
-  const { info, setInfo } = useContext(CollectInfoContext);
+  const { info } = useContext(CollectInfoContext);
   const submitCtx = useContext(SubmitContext);
+  const skillsCtx = useContext(SkillsContext);
+  const personalCtx = useContext(PersonalInfoContext);
+  const covidCtx = useContext(CovidContext);
+  const insightsCtx = useContext(InsightsContext);
 
   const timeout = useCallback(() => {
     const headers = {
@@ -27,14 +37,20 @@ const Submit = () => {
         headers,
         { withCredentials: true }
       )
-      .then((res) => console.log(res));
+      .then((res) => {
+        console.log(res);
+      });
+
     // setInfo({ token: '23b05ea5-c77a-4096-92c2-d29670f23e0d' });
     setTimeout(() => {
-      console.log(info);
-
+      // console.log(info);
+      personalCtx.clearState();
+      skillsCtx.clearState();
+      covidCtx.clearState();
+      insightsCtx.clearState();
       submitCtx.setIsMainPath(true);
     }, 3000);
-  }, [submitCtx, info]);
+  }, [submitCtx, info, personalCtx, covidCtx, insightsCtx, skillsCtx]);
 
   return (
     <div className={classes.mainDiv}>

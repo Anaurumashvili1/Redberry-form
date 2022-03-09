@@ -22,6 +22,7 @@ export const SkillsContext = createContext({
   skillsInfo: {},
   submitPage: () => {},
   pageSubmitted: false,
+  clearPage: () => {},
 });
 
 const skillsYearsReducer = (state, action) => {
@@ -56,6 +57,13 @@ const skillsTitleReducer = (state, action) => {
   if (action.type === 'CLEAR') {
     return { value: 'Skills', isSelected: false, isTouched: false };
   }
+
+  if (action.type === 'CLEAN') {
+    return { value: 'Skills', isSelected: false, isTouched: false };
+  }
+  if (action.type === 'CLEAN') {
+    return { value: 'Skills', isSelected: false, isTouched: false };
+  }
   return { value: 'Skills', isSelected: false, isTouched: false };
 };
 
@@ -84,6 +92,9 @@ const skillsValidityReducer = (state, action) => {
       submitted: false,
     };
   }
+  if (action.type === 'CLEAN') {
+    return { skillsPageIsValid: false, skillsArray: [], submitted: false };
+  }
   return { skillsPageIsValid: false, skillsArray: [], submitted: false };
 };
 
@@ -99,6 +110,7 @@ export const SkillsProvider = ({ children }) => {
       });
   }, []);
   const [removedList, setRemovedList] = useState([]);
+  // const [skillsInfo, setSkillsInfo] = useState([]);
 
   const [titleState, dispatchTitle] = useReducer(skillsTitleReducer, {
     value: 'Skills',
@@ -114,7 +126,11 @@ export const SkillsProvider = ({ children }) => {
 
   const [skillsValidityState, dispatchSkillsValidity] = useReducer(
     skillsValidityReducer,
-    { skillsPageIsValid: false, skillsArray: [], submitted: false }
+    {
+      skillsPageIsValid: false,
+      skillsArray: [],
+      submitted: false,
+    }
   );
 
   const addLanguage = (e) => {
@@ -177,11 +193,22 @@ export const SkillsProvider = ({ children }) => {
     experience: parseInt(skillsValidityState.skillsArray[i].years),
   }));
 
+  // setSkillsInfo(
+  //   removedListMapped.map((e, i) => ({
+  //     id: e.id,
+  //     experience: parseInt(skillsValidityState.skillsArray[i].years),
+  //   }))
+  // );
+
   const submitPage = useCallback(() => {
     dispatchSkillsValidity({ type: 'SUBMIT' });
   }, []);
 
-  // useCallback(useSubmit(skillsInfo), [skillsInfo]);
+  const clearPage = () => {
+    // dispatchSkillsValidity({ type: 'CLEAN' });
+    dispatchTitle({ type: 'CLEAN' });
+    dispatchYear({ type: 'CLEAN' });
+  };
 
   const skillsContext = {
     skillTitle: titleState.value,
@@ -201,6 +228,7 @@ export const SkillsProvider = ({ children }) => {
     removedList,
     submitPage,
     skillsInfo,
+    clearState: clearPage,
   };
   return (
     <SkillsContext.Provider value={{ ...skillsContext }}>
@@ -234,6 +262,7 @@ export const PersonalInfoContext = createContext({
   lastNameBlur: () => {},
   phoneBlur: () => {},
   submitPage: () => {},
+  clearState: () => {},
   phoneIsTouched: false,
 });
 
@@ -330,6 +359,25 @@ const personalInfoReducer = (state, action) => {
     };
   }
 
+  if (action.type === 'CLEAR') {
+    return {
+      first_name: '',
+      last_name: '',
+      email: '',
+      phone: '',
+      firstNameIsValid: false,
+      lastNameIsValid: false,
+      emailIsValid: false,
+      phoneNumberIsValid: true,
+      isSubmitted: false,
+      firstNameIsTouched: false,
+      lastNameIsTouched: false,
+      emailIsTouched: false,
+      phoneIsTouched: false,
+      pageIsValid: false,
+    };
+  }
+
   return {
     first_name: '',
     last_name: '',
@@ -394,6 +442,10 @@ export const PersonalInfoProvider = ({ children }) => {
     dispatchPersonalInfo({ type: 'LAST_NAME_BLUR' });
   };
 
+  const clearState = () => {
+    dispatchPersonalInfo({ type: 'CLEAR' });
+  };
+
   const submitPage = () => {
     if (
       personalInfoState.emailIsValid &&
@@ -422,6 +474,7 @@ export const PersonalInfoProvider = ({ children }) => {
     lastNameBlur,
     phoneBlur,
     submitPage,
+    clearState,
     isSubmitted: personalInfoState.isSubmitted,
     firstNameIsTouched: personalInfoState.firstNameIsTouched,
     lastNameIsTouched: personalInfoState.lastNameIsTouched,
@@ -456,6 +509,7 @@ export const CovidContext = createContext({
   isVaccinatedIsValid: false,
   vaccineDateIsValid: false,
   isSubmitted: false,
+  clearState: () => {},
 });
 
 const covidPageReducer = (state, action) => {
@@ -538,6 +592,22 @@ const covidPageReducer = (state, action) => {
       pageIsValid: true,
     };
   }
+  if (action.type === 'CLEAR') {
+    return {
+      workType: '',
+      hadCovid: null,
+      covidDate: '',
+      isVaccinated: null,
+      vaccineDate: '',
+      workTypeIsValid: false,
+      hadCovidIsValid: false,
+      covidDateIsValid: true,
+      isVaccinatedIsValid: false,
+      vaccineDateIsValid: true,
+      pageIsValid: false,
+      isSubmitted: false,
+    };
+  }
 
   return {
     workType: '',
@@ -584,7 +654,9 @@ export const CovidPageProvider = ({ children }) => {
   const vaccineDateChanger = (e) => {
     dispatchCovidState({ type: 'VACCINE_DATE', payload: e.target.value });
   };
-
+  const clearState = () => {
+    dispatchCovidState({ type: 'CLEAR' });
+  };
   const submitPage = () => {
     if (
       covidPageState.workTypeIsValid &&
@@ -616,6 +688,7 @@ export const CovidPageProvider = ({ children }) => {
     covidDateChanger,
     vaccineDateChanger,
     submitPage,
+    clearState,
     isSubmitted: covidPageState.isSubmitted,
   };
 
@@ -638,6 +711,7 @@ export const InsightsContext = createContext({
   changeWillOrganize: (e) => {},
   changeTopic: (e) => {},
   changeSpecial: (e) => {},
+  clearState: () => {},
 });
 
 const insightsReducer = (state, action) => {
@@ -676,6 +750,18 @@ const insightsReducer = (state, action) => {
   if (action.type === 'SUBMIT') {
     return { ...state, isSubmitted: true };
   }
+  if (action.type === 'CLEAR') {
+    return {
+      will_organize_devtalk: null,
+      devtalk_topic: '',
+      something_special: '',
+      pageIsValid: false,
+      willOrganizeIsValid: false,
+      topicIsValid: false,
+      specialIsValid: false,
+      isSubmitted: false,
+    };
+  }
   return {
     will_organize_devtalk: null,
     devtalk_topic: '',
@@ -711,12 +797,15 @@ export const InsightsProvider = ({ children }) => {
   const submitPage = () => {
     dispatchInsights({ type: 'SUBMIT' });
   };
-
+  const clearState = () => {
+    dispatchInsights({ type: 'CLEAR' });
+  };
   const insightsContext = {
     submitPage,
     changeWillOrganize,
     changeTopic,
     changeSpecial,
+    clearState,
     will_organize_devtalk: insightsState.will_organize_devtalk,
     devtalk_topic: insightsState.devtalk_topic,
     something_special: insightsState.something_special,

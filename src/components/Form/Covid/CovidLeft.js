@@ -14,8 +14,6 @@ const requiredClassesForDate =
 const CovidLeft = () => {
   const ctx = useContext(CovidContext);
   const switcherCtx = useContext(SwitcherContext);
-  console.log(ctx.workType);
-  // console.log(ctx.vaccineDateIsValid);
 
   return (
     <>

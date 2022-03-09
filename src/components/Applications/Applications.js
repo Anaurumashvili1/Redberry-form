@@ -13,11 +13,6 @@ const Applications = () => {
   const [skillsOutput, setSkillsOutput] = useState([]);
   const { skills } = useContext(SkillsContext);
 
-  console.log(skillsOutput);
-  console.log(applicationsArray);
-
-  //   skills;
-
   useEffect(() => {
     axios
       .get(
@@ -31,7 +26,6 @@ const Applications = () => {
 
   useEffect(() => {
     const mappedSkills = applicationsArray.map((app) => app.skills);
-    console.log(mappedSkills);
     if (mappedSkills.length > 0 && skills.length > 0) {
       setSkillsOutput(
         mappedSkills.map((skill) =>

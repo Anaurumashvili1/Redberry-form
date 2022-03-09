@@ -6,14 +6,14 @@ import { useContext } from 'react';
 import { SkillsContext } from '../../../store/formContext';
 import minus from '../../../images/Remove.png';
 import { SwitcherContext } from '../../../store/switchPageContext';
-import { CollectInfoContext } from '../../../store/collectInfoContext';
+// import { CollectInfoContext } from '../../../store/collectInfoContext';
 // import useSubmit from '../../../hooks/use-submit';
 
 const SkillsLeft = () => {
   const ctx = useContext(SkillsContext);
   const switcherCtx = useContext(SwitcherContext);
-  const infoCtx = useContext(CollectInfoContext);
-  console.log(infoCtx.info);
+  // const infoCtx = useContext(CollectInfoContext);
+  // console.log(infoCtx.info);
   const pageValidationClasses = classes.required + ' ' + classes.requiredBottom;
 
   return (
