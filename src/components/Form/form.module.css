@@ -64,7 +64,7 @@ select {
   appearance: none;
   background-color: white;
   color: #454545;
-  background-image: url('../../SelectArrow.png');
+  background-image: url('../../images/SelectArrow.png');
   background-repeat: no-repeat;
   background-position: 420px;
 }

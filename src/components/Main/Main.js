@@ -1,6 +1,6 @@
 import classes from './Main.module.css';
 import Button from './Button';
-import rocketman from '../../rocketman.png';
+import rocketman from '../../images/rocketman.png';
 import { Link } from 'react-router-dom';
 
 const Main = () => {

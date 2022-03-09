@@ -1,6 +1,6 @@
 import classes from './PageSwitcher.module.css';
-import previous from '../../Previous.png';
-import next from '../../Next.png';
+import previous from '../../images/Previous.png';
+import next from '../../images/Next.png';
 import { Link } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import { SwitcherContext } from '../../store/switchPageContext';

@@ -1,7 +1,7 @@
 import classes from '../form.module.css';
 import PageSwitcher from '../PageSwitcher';
-import ellipse from '../../../EllipseRed.png';
-import lightEllipse from '../../../EllipseLight.png';
+import ellipse from '../../../images/EllipseRed.png';
+import lightEllipse from '../../../images/EllipseLight.png';
 import { CovidContext } from '../../../store/formContext';
 import { useContext } from 'react';
 import { SwitcherContext } from '../../../store/switchPageContext';

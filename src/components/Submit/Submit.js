@@ -1,12 +1,12 @@
 import classes from './Submit.module.css';
 import Button from './Button';
 import { Link } from 'react-router-dom';
-import { useCallback, useState, useContext } from 'react';
+import { useCallback, useContext } from 'react';
 import { CollectInfoContext } from '../../store/collectInfoContext';
 import { SubmitContext } from '../../store/submitContext';
 import axios from 'axios';
 
-const Submit = (props) => {
+const Submit = () => {
   const { info, setInfo } = useContext(CollectInfoContext);
   const submitCtx = useContext(SubmitContext);
 

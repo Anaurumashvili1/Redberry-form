@@ -1,10 +1,10 @@
 import classes from '../form.module.css';
 import PageSwitcher from '../PageSwitcher';
-import ellipse from '../../../EllipseRed.png';
-import lightEllipse from '../../../EllipseLight.png';
-import { useContext, useEffect } from 'react';
+import ellipse from '../../../images/EllipseRed.png';
+import lightEllipse from '../../../images/EllipseLight.png';
+import { useContext } from 'react';
 import { SkillsContext } from '../../../store/formContext';
-import minus from '../../../Remove.png';
+import minus from '../../../images/Remove.png';
 import { SwitcherContext } from '../../../store/switchPageContext';
 import { CollectInfoContext } from '../../../store/collectInfoContext';
 // import useSubmit from '../../../hooks/use-submit';

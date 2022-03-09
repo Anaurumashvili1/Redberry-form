@@ -1,8 +1,11 @@
 import classes from './Applications.module.css';
 import axios from 'axios';
 import { useState, useEffect, useContext } from 'react';
-import ArrowDown from '../../VectorDown.png';
+import ArrowDown from '../../images/VectorDown.png';
 import { SkillsContext } from '../../store/formContext';
+import SelectedInput from '../../images/selectedInput.png';
+import radioInput from '../../images/radiobutton.png';
+import date from '../../images/date.png';
 
 const Applications = () => {
   const [applicationsArray, setApplicationsArray] = useState([]);
@@ -116,38 +119,139 @@ const Applications = () => {
                     <div className={classes.covid}>
                       <h3 className={classes.h3title}>Covid Situation</h3>
                       <div className={classes.covidRadio}>
-                        <label htmlFor="covid">
-                          how would you prefer to work?
-                        </label>
+                        <p>How would you prefer to work?</p>
                         <div>
                           {' '}
-                          <input type="radio" name="covid" id="from_office" />
+                          {applicationsArray[index].work_preference ===
+                          'from_office' ? (
+                            <img src={SelectedInput} alt="" />
+                          ) : (
+                            <img src={radioInput} alt="" />
+                          )}{' '}
                           From Sairme Office
                         </div>
                         <div>
-                          <input
-                            className={classes.radio}
-                            type="radio"
-                            name="covid"
-                            id="from_home"
-                            disabled={true}
-                          />
-                          From Home
+                          {applicationsArray[index].work_preference ===
+                          'from_home' ? (
+                            <img src={SelectedInput} alt="" />
+                          ) : (
+                            <img src={radioInput} alt="" />
+                          )}
+                          From home
                         </div>
                         <div>
                           {' '}
-                          <input
-                            type="radio"
-                            name="covid"
-                            id="hybrid"
-                            checked={true}
-                          />
+                          {applicationsArray[index].work_preference ===
+                          'hybrid' ? (
+                            <img src={SelectedInput} alt="" />
+                          ) : (
+                            <img src={radioInput} alt="" />
+                          )}
                           Hybrid
+                        </div>
+                      </div>
+                      <div className={classes.covidRadio}>
+                        <p>Did you have Covid 19?</p>
+                        <div>
+                          {' '}
+                          {applicationsArray[index].had_covid ? (
+                            <img src={SelectedInput} alt="" />
+                          ) : (
+                            <img src={radioInput} alt="" />
+                          )}
+                          Yes
+                        </div>
+                        <div>
+                          {!applicationsArray[index].had_covid ? (
+                            <img src={SelectedInput} alt="" />
+                          ) : (
+                            <img src={radioInput} alt="" />
+                          )}
+                          No
+                        </div>
+                      </div>
+
+                      <div className={classes.covidDate}>
+                        <p>When did you have covid 19?</p>
+                        <div>
+                          {' '}
+                          {applicationsArray[index].had_covid_at !== null
+                            ? applicationsArray[index].had_covid_at
+                            : 'N/A'}
+                          <img src={date} alt="" />
+                        </div>
+                      </div>
+
+                      <div className={classes.covidRadio}>
+                        <p>Have you been vaccinated?</p>
+                        <div>
+                          {' '}
+                          {applicationsArray[index].vaccinated ? (
+                            <img src={SelectedInput} alt="" />
+                          ) : (
+                            <img src={radioInput} alt="" />
+                          )}
+                          Yes
+                        </div>
+                        <div>
+                          {!applicationsArray[index].vaccinated ? (
+                            <img src={SelectedInput} alt="" />
+                          ) : (
+                            <img src={radioInput} alt="" />
+                          )}
+                          No
+                        </div>
+                      </div>
+
+                      <div className={classes.covidDate}>
+                        <p>When did you get covid vaccine?</p>
+                        <div>
+                          {' '}
+                          {applicationsArray[index].vaccinated_at !== null
+                            ? applicationsArray[index].vaccinated_at
+                            : 'N/A'}
+                          <img src={date} alt="" />
                         </div>
                       </div>
                     </div>
                     <div className={classes.insights}>
                       <h3 className={classes.h3title}>Insigts</h3>
+                      <div className={classes.covidRadio}>
+                        <p>
+                          Would you attend Devtalks and maybe also organize your
+                          own?
+                        </p>
+                        <div>
+                          {' '}
+                          {applicationsArray[index].will_organize_devtalk ? (
+                            <img src={SelectedInput} alt="" />
+                          ) : (
+                            <img src={radioInput} alt="" />
+                          )}
+                          Yes
+                        </div>
+                        <div>
+                          {!applicationsArray[index].will_organize_devtalk ? (
+                            <img src={SelectedInput} alt="" />
+                          ) : (
+                            <img src={radioInput} alt="" />
+                          )}
+                          No
+                        </div>
+                      </div>
+
+                      <div className={classes.textArea}>
+                        <p>What would you speak about at Devtalk?</p>
+                        <div className={classes.bigTextarea}>
+                          {applicationsArray[index].devtalk_topic}
+                        </div>
+                      </div>
+                      <div className={classes.textArea}>
+                        <p>Tell us somthing special</p>
+                        <div className={classes.smallTextArea}>
+                          {applicationsArray[index].something_special}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
