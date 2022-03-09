@@ -190,7 +190,10 @@ export const SkillsProvider = ({ children }) => {
 
   const skillsInfo = removedListMapped.map((e, i) => ({
     id: e.id,
-    experience: parseInt(skillsValidityState.skillsArray[i].years),
+    experience:
+      skillsValidityState.skillsArray.length > 0
+        ? parseInt(skillsValidityState.skillsArray[i].years)
+        : 0,
   }));
 
   // setSkillsInfo(
@@ -205,7 +208,7 @@ export const SkillsProvider = ({ children }) => {
   }, []);
 
   const clearPage = () => {
-    // dispatchSkillsValidity({ type: 'CLEAN' });
+    dispatchSkillsValidity({ type: 'CLEAN' });
     dispatchTitle({ type: 'CLEAN' });
     dispatchYear({ type: 'CLEAN' });
   };
